@@ -1,0 +1,132 @@
+#!/bin/bash
+
+rp = sudo
+
+function MainMenu(){
+    options=()
+        options+=("1" "System")
+        options+=("2" "Beginner Guide")
+        options+=("3" "Package Info")
+        options+=("4" "Configuration")
+        options+=("5" "Arch Linux")
+        options+=("6" "Others")
+        options+=("7" "Exit")
+    help=$(whiptail --backtitle "Calinix Help Menu" --title "Main Menu" --menu "" 0 0 0 \
+            "${options[@]}" \
+            3>&1 1>&2 2>&3)
+    if [ "$?" = "0" ]; then
+		case ${help} in
+            "1")
+               systemMenu 
+            ;;
+        esac
+    fi
+}
+
+systemMenu(){
+    options=()
+        options+=("1" "Update your System")
+        options+=("2" "Update your Repositories")
+        options+=("3" "Clear Package Cache")
+        options+=("4" "Change your Shell")
+        options+=("5" "Install a Different Kernel")
+        options+=("6" "(By untergrundbiber)")
+        options+=("7" "(By quelotic)")
+        options+=("8" "(By thegoldgoat)")
+        options+=("9" "(By KardiWeb)")
+        options+=("10" "(By mrboen94)")
+        options+=("11" "(By dawidd6)")
+        options+=("12" "(By hugok)")
+        options+=("13" "(By Anonymous_Prodject)")
+        options+=("14" "(By Mystogab)")
+        options+=("15" "(By c0b41)")
+    help=$(whiptail --backtitle "System-Related Tweaks" --title "System" --menu "" 0 0 0 \
+            "${options[@]}" \
+            3>&1 1>&2 2>&3)
+    if [ "$?" = "0" ]; then
+		case ${help} in
+            "1")
+                whiptail --msgbox --title "WARNING" "Don't stop or interrupt an update in between, Let it happen. Interrupting may damage dependencies or worse, break your system" 10 50
+                tput setaf 2; echo "Updating your whole system...\n"
+                sudo pacman -Syu --noconfirm
+                whiptail --msgbox --title "Finished" "System was Updated" 10 50
+            ;;
+            "2")
+                tput setaf 2; echo "Updating your repositories...\n"
+                sudo pacman -Syy --noconfirm
+                whiptail --msgbox --title "Finished" "The Repositories was Updated" 10 50
+            ;;
+            "3")
+                whiptail --msgbox --title "INFO" "This is usually done when you face the following error:\n\nFailed to init transaction (unable to lock database)\n\nClearing the db lock usually fixes this error" 10 50
+                tput setaf 2; echo "Clearing Pacman Cache...\n"
+                sudo pacman -Sc --noconfirm
+                whiptail --msgbox --title "Finished" "Cache Deleted" 10 50
+            ;;
+            "4")
+                changeShell
+            ;;
+            "5")
+                installKernel
+            ;;
+            "1")
+                whiptail --msgbox --title "WARNING" "Don't stop or interrupt an update in between, Let it happen. Interrupting may damage dependencies or worse, break your system" 10 50
+                tput setaf 2; echo "Updating your whole system...\n"
+                sudo pacman -Syu --noconfirm
+                whiptail --msgbox --title "Finished" "System was Updated" 10 50
+            ;;
+        esac
+    fi
+}
+
+changeShell(){
+    options=()
+        options+=("1" "Bash")
+        options+=("2" "Zsh")
+        options+=("3" "Fish")
+    shn=$(whiptail --title "Shell" --menu "" 0 0 0 \
+            "${options[@]}" \
+            3>&1 1>&2 2>&3)
+    if [ "$?" = "0" ]; then
+		case ${shn} in
+            "1")
+                tput setaf 2; echo "Changing shell to ${shn}...\n"
+                sudo pacman -Sy bash --needed
+                sudo chsh $USER -s /bin/bash && echo 'Now log out.'
+                whiptail --msgbox --title "Finished" "Shell changed to ${shn}" 10 50
+            ;;
+            "2")
+                tput setaf 2; echo "Changing shell to ${shn}...\n"
+                 sudo pacman -Sy zsh --needed
+                 sudo chsh $USER -s /bin/zsh && echo 'Now log out.'
+                whiptail --msgbox --title "Finished" "Shell changed to ${shn}" 10 50
+            ;;
+            "3")
+                tput setaf 2; echo "Changing shell to ${shn}...\n"
+                 sudo pacman -Sy fish --needed
+                 sudo chsh $USER -s /bin/fish && echo 'Now log out.'
+                whiptail --msgbox --title "Finished" "Shell changed to ${shn}" 10 50
+            ;;
+        esac
+fi
+}
+
+installKernel(){
+    options=()
+        options+=("linux" "The standard linux kernel with latest updates (Default)")
+        options+=("linux-lts" "The LTS kernel with less frequent updates.")
+        options+=("linux-zen" "A kernel made for improving performance and providing best linux desktop experience")
+        options+=("linux-hardened" "A security focused kernel with some tweaks.")
+        options+=("linux-xanmod-lts" "A super performant kernel based on linux-zen. Suitable for gaming and performance centric work.")
+    shn=$(whiptail --title "Kernel" --menu "" 0 0 0 \
+            "${options[@]}" \
+            3>&1 1>&2 2>&3)
+    if [ "$?" = "0" ]; then
+		yay -S $shn ${shn}-headers --noconfirm
+        whiptail --msgbox --title "Finished" "Installed Kernel ${shn}" 10 50
+fi
+}
+
+
+
+MainMenu
+# systemMenu
