@@ -1,6 +1,11 @@
 #!/bin/bash
 
-rp = sudo
+function run {
+  if ! pgrep $1 ;
+  then
+    $@&
+  fi
+}
 
 function MainMenu(){
     options=()
@@ -18,6 +23,9 @@ function MainMenu(){
 		case ${help} in
             "1")
                systemMenu 
+            ;;
+            "2")
+                beginnerGuide
             ;;
         esac
     fi
@@ -126,6 +134,134 @@ installKernel(){
 fi
 }
 
+beginnerGuide(){
+    options=()
+        options+=("1" "A Gentle Introduction To Linux")
+        options+=("2" "Reasons to Run Arch Linux")
+        options+=("3" "The Pacman Package Manager for Arch Linux")
+        options+=("4" "How to Learn Linux?")
+        options+=("5" "How to get more comfortable in Linux than Windows/OSX?")
+        options+=("6" "Mistakes New Linux Users make")
+        options+=("7" "Beginner's Guide To Linux Terminal")
+        options+=("8" "Introduction to Alacritty Terminal Emulator")
+        options+=("9" "Beginner's Guide to GIMP")
+        options+=("10" "Ultimate Guide to Yay")
+        options+=("11" "A comprehensive guide to Tiling Window Managers")
+        options+=("12" "Why Use A Tiling Window Manager?")
+        options+=("13" "F.A.Q for Tiling WIndow Managers")
+        options+=("14" "Make Arch Linux a bit more Stable")
+        options+=("15" "Terminal Disk Utilities in Arch Linux")
+        options+=("16" "Beginner's Guide to Zsh")
+        options+=("17" "")
+        options+=("18" "")
+        options+=("19" "")
+        options+=("20" "")
+        options+=("21" "")
+        options+=("22" "")
+        options+=("23" "")
+        options+=("24" "")
+    shn=$(whiptail --title "Kernel" --menu "" 0 0 0 \
+            "${options[@]}" \
+            3>&1 1>&2 2>&3)
+    if [ "$?" = "0" ]; then
+        case ${shn} in
+            1)
+                run xdg-open "https://www.youtube.com/watch?v=G4C2pMVTxao"
+                ;;
+            2)
+                run xdg-open "https://www.youtube.com/watch?v=8RqFL92IEYs"
+                ;;
+            3)
+                run xdg-open "https://www.youtube.com/watch?v=-UvZ4BEAXFU"
+                ;;
+            4)
+                run xdg-open "https://www.youtube.com/watch?v=a2qblT7o4mE"
+                ;;
+            5)
+                run xdg-open "https://www.youtube.com/watch?v=fWHKAn5W2CA"
+                ;;
+            6)
+                run xdg-open "https://www.youtube.com/watch?v=mkrN4uAcDGk"
+                ;;
+            7)
+                run xdg-open "https://www.youtube.com/watch?v=s3ii48qYBxA"
+                ;;
+            8)
+                run xdg-open "https://www.youtube.com/watch?v=PZPMvTvUf1Y1"
+                ;;
+            9)
+                run xdg-open "https://www.youtube.com/watch?v=YHwnlgD18kE"
+                ;;
+            10)
+                run xdg-open "https://www.youtube.com/watch?v=BbnSoY_yDr8&t=137s"
+                ;;
+            11)
+                run xdg-open "https://www.youtube.com/watch?v=Obzf9ppODJU"
+                ;;
+            12)
+                run xdg-open "https://www.youtube.com/watch?v=Lj1IfdKY0CU"
+                ;;
+            13)
+                run xdg-open "https://www.youtube.com/watch?v=Qauypve7zbY"
+                ;;
+            14)
+                run xdg-open "https://www.youtube.com/watch?v=xhVS1HKwGWw"
+                ;;
+            15)
+                run xdg-open "https://www.youtube.com/watch?v=jrUcdVgTmZ4"
+                ;;
+            16)
+                run xdg-open "https://www.youtube.com/watch?v=MSPu-lYF-A8"
+                ;;
+            17)
+                run xdg-open ""
+                ;;
+            18)
+                run xdg-open ""
+                ;;
+            19)
+                run xdg-open ""
+                ;;
+            20)
+                run xdg-open ""
+                ;;
+            21)
+                run xdg-open ""
+                ;;
+            22)
+                run xdg-open ""
+                ;;
+            23)
+                run xdg-open ""
+                ;;
+            24)
+                run xdg-open ""
+                ;;
+            25)
+                run xdg-open ""
+                ;;
+            26)
+                run xdg-open ""
+                ;;
+            27)
+                run xdg-open ""
+                ;;
+            28)
+                run xdg-open ""
+                ;;
+            29)
+                run xdg-open ""
+                ;;
+            30)
+                run xdg-open ""
+                ;;
+            31)
+                run xdg-open ""
+                ;;
+            
+        esac
+fi
+}
 
 
 MainMenu
