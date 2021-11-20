@@ -152,8 +152,8 @@ beginnerGuide(){
         options+=("14" "Make Arch Linux a bit more Stable")
         options+=("15" "Terminal Disk Utilities in Arch Linux")
         options+=("16" "Beginner's Guide to Zsh")
-        options+=("17" "")
-        options+=("18" "")
+        options+=("17" "What are Linux Desktop Environments")
+        options+=("18" "Vim tutorial by Ben Awad")
         options+=("19" "")
         options+=("20" "")
         options+=("21" "")
@@ -214,10 +214,10 @@ beginnerGuide(){
                 run xdg-open "https://www.youtube.com/watch?v=MSPu-lYF-A8"
                 ;;
             17)
-                run xdg-open ""
+                run xdg-open "https://www.youtube.com/watch?v=2sBsxrWD9to"
                 ;;
             18)
-                run xdg-open ""
+                run xdg-open "https://youtu.be/IiwGbcd8S7I"
                 ;;
             19)
                 run xdg-open ""
